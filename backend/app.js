@@ -1,18 +1,20 @@
 /**
  * @file Manages all operations related to institutions
- * @author John Doe
+ * @author matt
  */
 import express from "express";
 import cors from "cors";
 import compression from "compression";
 import indexRoutes from "./routes/index.js";
 import institutionRoutes from "./routes/institution.js";
+import isContentTypeApplicationJSON from "./middleware/content-type.js";
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 const API_BASE_URL = process.env.API_BASE_URL || "http://localhost";
 
+app.use(isContentTypeApplicationJSON);
 
 app.use(cors());
 app.use(compression());
