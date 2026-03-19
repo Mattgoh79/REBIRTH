@@ -12,8 +12,11 @@ const createInstitution = async (req, res) => {
       data: { name, region, country, website, emailAddress },
     });
 
-    const institutions = await prisma.institution.findMany();
-
+    const institutions = await prisma.institution.findMany({
+      select: {
+        id: true,
+        },
+});
     return res.status(201).json({
       message: "Institution successfully created",
       data: institutions,
@@ -24,8 +27,12 @@ const createInstitution = async (req, res) => {
 };
 const getInstitutions = async (req, res) => {
   try {
-    const institutions = await prisma.institution.findMany();
 
+    const institutions = await prisma.institution.findMany({
+      select: {
+        id: true,
+        },
+});
     if (institutions.length === 0) {
       return res.status(404).json({ message: "No institutions found" });
     }
@@ -39,7 +46,7 @@ const getInstitution = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const institution = await prisma.institution.findUnique({ where: { id } });
+    const institution = await prisma.institution.findUnique({ where: { id }, select: { id: true } });
 
     if (!institution) {
       return res.status(404).json({
@@ -57,7 +64,7 @@ const updateInstitution = async (req, res) => {
     const { id } = req.params;
     const { name, region, country, website, emailAddress } = req.body;
 
-    let institution = await prisma.institution.findUnique({ where: { id } });
+    let institution = await prisma.institution.findUnique({ where: { id }, select: { id: true } });
 
     if (!institution) {
       return res.status(404).json({

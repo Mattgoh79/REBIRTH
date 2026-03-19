@@ -13,9 +13,8 @@
     "docker:run:dev": "docker run --name id607001-db-dev -e POSTGRES_PASSWORD=HelloWorld123 -p 5432:5432 -d postgres",
     "env:copy": "cp .env.example .env || copy .env.example .env",
     "prisma:migrate": "npx prisma migrate dev",
-"prisma:reset": "npx prisma migrate reset --force",
-"prisma:studio": "npx prisma studio"
-
+    "prisma:reset": "npx prisma migrate reset --force",
+    "prisma:studio": "npx prisma studio"
   },
   "lint-staged": {
     "*.js": "prettier --write"
@@ -37,7 +36,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "commitizen": "^4.3.1",
+    "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
