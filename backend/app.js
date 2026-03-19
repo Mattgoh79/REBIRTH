@@ -8,6 +8,8 @@ import compression from "compression";
 import indexRoutes from "./routes/index.js";
 import institutionRoutes from "./routes/institution.js";
 import isContentTypeApplicationJSON from "./middleware/content-type.js";
+import departmentRoutes from "./routes/department.js";
+
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use(express.urlencoded({ extended: false })); // Parses URL-encoded (form) d
 app.use(express.json()); // Parses JSON request bodies
 app.use("/api/institutions", institutionRoutes);
 app.use("/", indexRoutes);
+app.use("/api/departments", departmentRoutes);
+
 
 app.get("/", (req, res) => {
   return res.status(200).json({
