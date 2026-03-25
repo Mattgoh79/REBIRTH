@@ -20,11 +20,32 @@ const createDepartment = async (req, res) => {
 };
 
 const getDepartments = async (req, res) => {
-  // Omitted for brevity
+  try{
+    const departments = await prisma.institution.findMany();
+    if(departments.length === 0){
+      return res.status(404).kson({ message: "No departments found"});
+    }
+    return res.status(200).json({message: departments});
+
+  }catch (err){
+    return res.status(500).json({message: err.message});
+  }
 };
 
 const getDepartment = async (req, res) => {
-  // Omitted for brevity
+  try{
+    const{id} = req.params;
+    const department = await prisma.department.findUnique();
+    if(!department){
+      return res.status(404).json({
+        message: `No Department with the id: ${id} found`,
+      });
+    }
+    return res.status(200).json({data: institution});
+  }catch(err) {
+    return res.status(500).json({message: err.message});
+  }
+
 };
 
 const updateDepartment = async (req, res) => {
@@ -54,7 +75,25 @@ const updateDepartment = async (req, res) => {
 };
 
 const deleteDepartment = async (req, res) => {
-  // Omitted for brevity
+  try {
+    const { id } = req.params;
+
+    const department = await prisma.department.findUnique({ where: { id } });
+
+    if (!institution) {
+      return res.status(404).json({
+        message: `No department with the id: ${id} found`,
+      });
+    }
+
+    await prisma.department.delete({ where: { id } });
+
+    return res.status(200).json({
+      message: `Department with the id: ${id} successfully deleted`,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 };
 
 export {
