@@ -1,104 +1,83 @@
-/**
- * @file Manages all operations related to institutions
- * @author John Doe
- */
-import prisma from "../prisma/db.js";
+import institutionRepository from "../repositories/institution.js";
 
 const createInstitution = async (req, res) => {
   try {
-    const { name, region, country, website, emailAddress } = req.body;
-
-    await prisma.institution.create({
-      data: { name, region, country, website, emailAddress },
+    const { name, region, country } = req.body;
+    const institution = await institutionRepository.create({
+      name,
+      region,
+      country,
     });
-
-    const institutions = await prisma.institution.findMany({
-      select: {
-        id: true,
-        },
-});
     return res.status(201).json({
       message: "Institution successfully created",
-      data: institutions,
-    });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
-const getInstitutions = async (req, res) => {
-  try {
-
-    const institutions = await prisma.institution.findMany({
-      select: {
-        id: true,
-        },
-});
-    if (institutions.length === 0) {
-      return res.status(404).json({ message: "No institutions found" });
-    }
-
-    return res.status(200).json({ data: institutions });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
-const getInstitution = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const institution = await prisma.institution.findUnique({ where: { id }, select: { id: true } });
-
-    if (!institution) {
-      return res.status(404).json({
-        message: `No institution with the id: ${id} found`,
-      });
-    }
-
-    return res.status(200).json({ data: institution });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
-const updateInstitution = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, region, country, website, emailAddress } = req.body;
-
-    let institution = await prisma.institution.findUnique({ where: { id }, select: { id: true } });
-
-    if (!institution) {
-      return res.status(404).json({
-        message: `No institution with the id: ${id} found`,
-      });
-    }
-
-    institution = await prisma.institution.update({
-      where: { id },
-      data: { name, region, country, website, emailAddress },
-    });
-
-    return res.status(200).json({
-      message: `Institution with the id: ${id} successfully updated`,
       data: institution,
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
-const deleteInstitution = async (req, res) => {
+
+const getInstitutions = async (req, res) => {
+  try {
+    const institutions = await institutionRepository.findAll();
+    if (institutions.length === 0) {
+      return res.status(404).json({ message: "No institutions found" });
+    }
+    return res.status(200).json({ data: institutions });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const getInstitution = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const institution = await prisma.institution.findUnique({ where: { id } });
-
+    const institution = await institutionRepository.findById(id);
     if (!institution) {
       return res.status(404).json({
         message: `No institution with the id: ${id} found`,
       });
     }
+    return res.status(200).json({ data: institution });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
-    await prisma.institution.delete({ where: { id } });
+const updateInstitution = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, region, country } = req.body;
+    const institution = await institutionRepository.findById(id);
+    if (!institution) {
+      return res.status(404).json({
+        message: `No institution with the id: ${id} found`,
+      });
+    }
+    const updatedInstitution = await institutionRepository.update(id, {
+      name,
+      region,
+      country,
+    });
+    return res.status(200).json({
+      message: `Institution with the id: ${id} successfully updated`,
+      data: updatedInstitution,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
 
+const deleteInstitution = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const institution = await institutionRepository.findById(id);
+    if (!institution) {
+      return res.status(404).json({
+        message: `No institution with the id: ${id} found`,
+      });
+    }
+    await institutionRepository.delete(id);
     return res.status(200).json({
       message: `Institution with the id: ${id} successfully deleted`,
     });
@@ -106,6 +85,7 @@ const deleteInstitution = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
 export {
   createInstitution,
   getInstitutions,

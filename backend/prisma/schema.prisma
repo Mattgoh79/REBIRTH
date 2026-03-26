@@ -17,6 +17,8 @@ model Institution {
   name      String   @unique
   region    String
   country   String
+  departments Department[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   website String? 
@@ -29,4 +31,26 @@ model Department {
   institution   Institution @relation(fields: [institutionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  PREFER_NOT_TO_SAY
+}
+
+model Player {
+  id            String      @id @default(uuid())
+  firstName     String
+  lastName      String?
+  emailAddress  String?      @unique
+  gender        Gender?
+  isInjured     Boolean?     @default(false)
+  dateOfBirth   DateTime    
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+
+
 }

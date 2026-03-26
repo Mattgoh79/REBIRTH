@@ -9,6 +9,7 @@ import indexRoutes from "./routes/index.js";
 import institutionRoutes from "./routes/institution.js";
 import isContentTypeApplicationJSON from "./middleware/content-type.js";
 import departmentRoutes from "./routes/department.js";
+import playerRoutes from "./routes/player.js";
 
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(express.json()); // Parses JSON request bodies
 app.use("/api/institutions", institutionRoutes);
 app.use("/", indexRoutes);
 app.use("/api/departments", departmentRoutes);
+app.use("/api/players", playerRoutes);
 
 
 app.get("/", (req, res) => {

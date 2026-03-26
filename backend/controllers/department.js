@@ -1,18 +1,20 @@
+/**
+ * @file Manages all operations related to institutions
+ * @author John Doe
+ */
 import prisma from "../prisma/db.js";
 
 const createDepartment = async (req, res) => {
   try {
     const { name, institutionId } = req.body;
 
-    await prisma.department.create({
-      data: { name, institutionId },
+    const department = await prisma.department.create({
+      data: { name, institution: { connect: { id: institutionId } } },
     });
-
-    const departments = await prisma.department.findMany();
 
     return res.status(201).json({
       message: "Department successfully created",
-      data: departments,
+      data: department,
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -23,7 +25,7 @@ const getDepartments = async (req, res) => {
   try{
     const departments = await prisma.institution.findMany();
     if(departments.length === 0){
-      return res.status(404).kson({ message: "No departments found"});
+      return res.status(404).json({ message: "No departments found"});
     }
     return res.status(200).json({message: departments});
 
@@ -52,7 +54,7 @@ const updateDepartment = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, institutionId } = req.body;
-    let department = await prisma.department.findUnique({ where: { id } });
+    const department = await prisma.department.findUnique({ where: { id } });
 
     if (!department) {
       return res.status(404).json({
@@ -60,14 +62,14 @@ const updateDepartment = async (req, res) => {
       });
     }
 
-    department = await prisma.department.update({
+    const updatedDepartment = await prisma.department.update({
       where: { id },
-      data: { name, institutionId },
+      data: { name, institution: { connect: { id: institutionId } } },
     });
 
     return res.status(200).json({
       message: `Department with the id: ${id} successfully updated`,
-      data: department,
+      data: updatedDepartment,
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });
