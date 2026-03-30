@@ -2,8 +2,8 @@ import playerRepository from "../repositories/player.js";
 
 const createPlayer = async (req, res) => {
   try {
-    const { id, first_name, last_name, email, gender, is_injured, date_of_birth } = req.body;
-    const player = await playerRepository.create({  id, first_name, last_name, email, gender, is_injured, date_of_birth
+    const { id, firstName, lastName, emailAddress, gender, isInjured, dateOfBirth } = req.body;
+    const player = await playerRepository.create({  id, firstName, lastName, emailAddress, gender, isInjured, dateOfBirth
     });
     return res.status(201).json({
       message: "Player successfully created",

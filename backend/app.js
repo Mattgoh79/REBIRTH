@@ -10,6 +10,7 @@ import institutionRoutes from "./routes/institution.js";
 import isContentTypeApplicationJSON from "./middleware/content-type.js";
 import departmentRoutes from "./routes/department.js";
 import playerRoutes from "./routes/player.js";
+import authRoutes from "./routes/auth.js";
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.use("/api/institutions", institutionRoutes);
 app.use("/", indexRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/players", playerRoutes);
+app.use("/api/auth", authRoutes);
 
 
 app.get("/", (req, res) => {

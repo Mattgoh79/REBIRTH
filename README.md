@@ -6,7 +6,7 @@
 2. npm install @prisma/client@^6.12.0
 3. npm install prisma@^6.12.0 --save-dev
 4. docker run --name id607001-db-dev -e POSTGRES\_PASSWORD=HelloWorld123 -p 5432:5432 -d postgres
-5. create .env file 
+5. create .env file (actually in real development don't give the env file like this bro)
 
 NODE\_ENV=development
 
@@ -30,7 +30,9 @@ DATABASE\_URL=postgresql://postgres:HelloWorld123@localhost:5432/postgres
 
 USE THIS IF INSTITUION NOT WORKING
 
-npx prisma migrate deploy (THIS RUNS THE MIGRATIONS HOW DID I NEED COPILOT TO TELL ME THIS AHAHDHGH
+npx prisma migrate deploy 
 
 
+
+(regarding application-setup.sh, when I run it my queries give me errors about running on the wrong port idk)
 
