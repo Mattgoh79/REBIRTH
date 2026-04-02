@@ -1,3 +1,7 @@
+/**
+ * @file Manages all operations related to courses
+ * @author ATT
+ */
 import institutionRepository from "../repositories/institution.js";
 
 const createInstitution = async (req, res) => {
