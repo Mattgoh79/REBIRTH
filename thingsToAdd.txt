@@ -1,0 +1,1 @@
+1. can make multiple same departments. make it so name has to be unique.

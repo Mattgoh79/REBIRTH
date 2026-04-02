@@ -6,7 +6,7 @@ import prisma from "../prisma/db.js";
 
 const createCourse = async (req, res) => {
   try {
-    const { name, departmentId } = req.body;
+    const {code, name, description,  department: { connect: { id: departmentId } }  } = req.body;
 
     const course = await prisma.course.create({
       data: { code, name, description,  department: { connect: { id: departmentId } } },
