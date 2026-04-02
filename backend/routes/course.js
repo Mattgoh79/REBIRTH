@@ -1,17 +1,37 @@
 /**
- * @file Manages all operations related to institutions
- * @author John Doe
+ * @file Manages all operations related to courses
+ * @author att
  */
 import express from "express";
+ 
 
-// Import the index controllers module
-import { getCourseInfo } from "../controllers/course.js";
+import {
+  createCourse,
+  getCourses,
+  getCourse,
+  updateCourse,
+  deleteCourse,
+} from "../controllers/course.js";
 
-// Create an Express router
 const router = express.Router();
 
-// Create a GET routes
-router.get("/", getCourseInfo); // The first argument is the route path, the second argument is the controller function
+router.post("/", createCourse);
+router.get("/", getCourses);
+router.get("/:id", getCourse);
+router.put("/:id", updateCourse);
+router.put("/", (req, res) => {
+  return res.status(400).json({
+    message: "id is required in the URL parameter",
+  });
+});
 
-// Export the router
+router.delete("/:id", deleteCourse);
+router.delete("/", (req, res) => {
+  return res.status(400).json({
+    message: "id is required in the URL parameter",
+  });
+});
+// You can also chain routes like this:
+// router.route("/").post(createCourse).get(getCourses);
+
 export default router;
