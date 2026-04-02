@@ -1,1 +1,2 @@
 1. can make multiple same departments. make it so name has to be unique.
+2. YOUGOTTA ADD REPOSITORIES FOR THE EXERCISES DONT FORGET THAT even though you already forgot that. DONT FORGET AGAIN or smth
