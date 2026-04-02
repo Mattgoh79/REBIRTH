@@ -9,7 +9,7 @@ const createCourse = async (req, res) => {
     const { name, departmentId } = req.body;
 
     const course = await prisma.course.create({
-      data: { name, department: { connect: { id: departmentId } } },
+      data: { code, name, description,  department: { connect: { id: departmentId } } },
     });
 
     return res.status(201).json({
@@ -64,7 +64,7 @@ const updateCourse = async (req, res) => {
 
     const updatedCourse = await prisma.course.update({
       where: { id },
-      data: { name, department: { connect: { id: departmentId } } },
+      data: { code, name, description,  department: { connect: { id: departmentId } } },
     });
 
     return res.status(200).json({

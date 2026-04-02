@@ -36,3 +36,4 @@ npx prisma migrate deploy
 
 (regarding application-setup.sh, when I run it my queries give me errors about running on the wrong port idk)
 
+9. Go to Render, Deploy Build. copy web address, use for postman

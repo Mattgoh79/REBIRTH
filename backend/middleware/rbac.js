@@ -10,7 +10,7 @@ const rbac = (requiredRole) => {
 
     if (user.role !== requiredRole) {
       return res.status(403).json({
-        message: `Forbidden. Insufficient privileges for role: ${user.role}`, //if not working, check if bearer token
+        message: `Forbidden. Insufficient privileges for role: ${user.role}`, //if not working, check if bearer token got put or not
       });
     }
 
