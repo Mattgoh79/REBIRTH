@@ -16,7 +16,10 @@
     "prisma:reset": "npx prisma migrate reset --force",
     "prisma:studio": "npx prisma studio",
     "prisma:seed:institution": "node ./prisma/seeding/institution.js",
-    "build:render": "npm install && npx prisma generate && npx prisma migrate deploy"
+    "build:render": "npm install && npx prisma generate && npx prisma migrate deploy",
+    "test": "mocha",
+    "test:coverage": "c8 mocha",
+    "test:coverage:report": "c8 report --reporter=html"
   },
   "lint-staged": {
     "*.js": "prettier --write"
@@ -42,6 +45,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "c8": "^11.0.0",
+    "chai": "^6.2.2",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^10.0.3",
@@ -49,8 +54,10 @@
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.4.0",
     "lint-staged": "^16.4.0",
+    "mocha": "^11.7.5",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.1",
-    "prisma": "^6.19.2"
+    "prisma": "^6.19.2",
+    "sinon": "^21.1.2"
   }
 }
