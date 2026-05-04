@@ -30,10 +30,13 @@ DATABASE\_URL=postgresql://postgres:HelloWorld123@localhost:5432/postgres
 
 USE THIS IF INSTITUION NOT WORKING
 
-npx prisma migrate deploy 
+npx prisma migrate deploy
 
 
 
-(regarding application-setup.sh, when I run it my queries give me errors about running on the wrong port idk)
+Run with Git Bash
 
-9. Go to Render, Deploy Build. copy web address, use for postman
+9. chmod +x application-setup.sh
+10. 
+11. ./application-setup.shGo to Render, Deploy Build. copy web address, use for postman
+
