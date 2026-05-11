@@ -1,0 +1,2 @@
+https://github.com/otago-polytechnic-bit-courses/ID607001-introductory-application-development-concepts/tree/s1-26/lecture-notes/week-09-api-integration-bootstrap-deployment
+week 9 got a lot of svelte components that may be useful

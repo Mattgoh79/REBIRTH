@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.10"
+  },
+  "dependencies": {
+    "@sveltestrap/sveltestrap": "^7.1.0",
+    "bootstrap": "^5.3.8"
   }
 }
